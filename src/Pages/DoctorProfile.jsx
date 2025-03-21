@@ -41,7 +41,7 @@ const DoctorProfile = () => {
 
   return (
     <div
-      className="min-h-screen bg-sky-100 p-6 flex"
+      className="min-h-screen bg-gradient-to-b from-[#ffcbc2] to-[#FFFFFF] p-6 flex"
       style={{ fontFamily: "Barlow, sans-serif" }}
     >
       {/* Sidebar Doctor Profile */}
@@ -93,60 +93,83 @@ const DoctorProfile = () => {
 
       {/* Main Reports Section */}
       <div className="w-3/4">
-        <div className="bg-white rounded-lg shadow p-6">
-          {reports.length === 0 ? (
-            <p className="text-gray-600 text-center">No reports found</p>
-          ) : (
-            reports.map(
-              (
-                report // ✅ Corrected 'patients.map()' to 'reports.map()'
-              ) => (
-                <div
-                  key={report._id} // ✅ Using 'report._id' instead of 'patient._id'
-                  onClick={() =>
-                    navigate(`/checkpatient/${report.patient?._id}`)
-                  }
-                  className="cursor-pointer mb-6 border rounded-lg p-6 hover:bg-sky-50 transition"
-                >
-                  <h3 className="text-lg font-semibold mb-4">
-                    Patient Name:{" "}
-                    <span className="text-gray-600">
-                      {report.patient?.name || "Unknown"}
-                    </span>
-                  </h3>
+        <div className="bg-white rounded-xl shadow-lg p-8 max-w-6xl mx-auto">
+          <h1
+            className="text-3xl text-center mb-4 font-bold text-[#c94a4a] cursor-pointer hover:scale-110 transition duration-300 ease-in-out tracking-widest"
+            style={{ fontFamily: "Pixelcraft, sans-serif" }}
+          >
+            Your Patients
+          </h1>
 
-                  <div className="grid grid-cols-2 gap-6">
-                    {/* Diagnosis Section */}
-                    <div className="bg-sky-100 rounded-lg p-6 h-full">
-                      <h4 className="text-center text-lg font-medium mb-4">
-                        Diagnosis
+          {reports.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-12">
+              <p className="text-gray-600 text-lg font-medium">
+                No reports found
+              </p>
+              <p className="text-gray-500 mt-2">
+                Add a new report to get started
+              </p>
+            </div>
+          ) : (
+            <div className="grid gap-6">
+              {reports.map((report) => (
+                <div
+                  key={report._id} // ✅ Corrected key reference
+                  onClick={() =>
+                    navigate(`/checkpatient/${report.patient._id}`)
+                  }
+                  className="cursor-pointer border border-[#f0c9bf] rounded-xl p-6 bg-[#f9ede9] hover:bg-[#f6d5cd] transition-all duration-300 hover:shadow-md"
+                >
+                  <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4 px-2">
+                    <h3 className="text-lg font-semibold">
+                      Patient Name:{" "}
+                      <span className="text-gray-700 font-medium">
+                        {report.patient?.name || "Unknown"}
+                      </span>
+                    </h3>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* Symptoms Section */}
+                    <div className="bg-gradient-to-br from-[#FAAB98] to-[#f8c0b2] rounded-xl shadow-sm p-6 h-full">
+                      <h4 className="text-center text-lg font-semibold mb-4 text-gray-800">
+                        Symptoms
                       </h4>
-                      <div className="mb-4 border h-28 rounded-2xl text-center flex items-center justify-center p-2">
-                        {report.diagnosis || "Not yet diagnosed"}
+                      <div className="mb-2 bg-white bg-opacity-70 border border-[#f0c9bf] h-28 rounded-xl flex items-center justify-center p-4 shadow-sm">
+                        <p className="text-gray-700 font-medium text-center">
+                          {report.symptoms || "No symptoms recorded"}
+                        </p>
                       </div>
                     </div>
 
                     {/* Prescription Section */}
-                    <div className="bg-sky-100 rounded-lg p-6 h-full">
-                      <h4 className="text-center text-lg font-medium mb-4">
+                    <div className="bg-gradient-to-br from-[#FAAB98] to-[#f8c0b2] rounded-xl shadow-sm p-6 h-full">
+                      <h4 className="text-center text-lg font-semibold mb-4 text-gray-800">
                         Prescription
                       </h4>
-                      <div className="mb-4 border h-28 rounded-2xl text-center p-2">
+                      <div className="mb-2 bg-white bg-opacity-70 border border-[#f0c9bf] h-28 rounded-xl p-4 shadow-sm overflow-y-auto">
                         {report.medications?.length > 0 ? (
                           <ul className="list-disc list-inside">
                             {report.medications.map((med, index) => (
-                              <li key={index}>{med}</li>
+                              <li
+                                key={index}
+                                className="text-gray-700 font-medium mb-1"
+                              >
+                                {med}
+                              </li>
                             ))}
                           </ul>
                         ) : (
-                          "No prescription yet"
+                          <p className="text-gray-700 font-medium text-center">
+                            No prescription yet
+                          </p>
                         )}
                       </div>
                     </div>
                   </div>
                 </div>
-              )
-            )
+              ))}
+            </div>
           )}
         </div>
       </div>

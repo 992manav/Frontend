@@ -28,6 +28,7 @@ function App() {
         <Route path="/checkpatient/:patientID" element={<CheckPatient />} />
         <Route path="/doctorprofile" element={<DoctorProfile />} />
         <Route path="/uploadmedicalrecord" element={<UploadMedicalRecord />} />
+        <Route path="/doctorprofile" element={<DoctorProfile />} />
       </Routes>
     </Router>
   );
