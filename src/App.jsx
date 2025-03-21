@@ -14,7 +14,7 @@ import ReportPage from "./Pages/ReportPage";
 import { VideoCall } from "./Components/VideoCall";
 import DoctorProfile from "./Pages/DoctorProfile";
 import Forum from "./Pages/Forum";
-
+import CheckPatient from "./Pages/CheckPatient";
 
 function App() {
   return (
@@ -29,6 +29,8 @@ function App() {
         <Route path="/firstconsult" element={<FirstConsult />}></Route>
         <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/aidiagnose" element={<AIDiagnose />} />
+        <Route path="/checkpatient/:patientID" element={<CheckPatient />} />
+        <Route path="/doctorprofile" element={<DoctorProfile />} />
         <Route path="/uploadmedicalrecord" element={<UploadMedicalRecord />} />
         <Route path="/emergency" element={<Emergency />}></Route>
         <Route path="/reportpage/:reportId" element={<ReportPage />} />
