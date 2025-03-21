@@ -4,6 +4,16 @@ const API_KEY = "AIzaSyA_hb7cq8vwzBx8qDVQVihCPDc1RDZ1Zho";
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent?key=${API_KEY}`;
 
 const AIDiagnose = () => {
+  const StaircaseText = ({ text, className = "" }) => {
+    const characters = Array.from(text);
+    const container = {
+      hidden: { opacity: 0 },
+      visible: (i = 1) => ({
+        opacity: 1,
+        transition: { staggerChildren: 0.06, delayChildren: 0.02 * i },
+      }),
+    };
+  }
   const [formData, setFormData] = useState({
     symptoms: "",
     symptomDuration: "Hours",
@@ -20,7 +30,6 @@ const AIDiagnose = () => {
   const [utterance, setUtterance] = useState(null);
   const [voices, setVoices] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
   useEffect(() => {
     const synth = window.speechSynthesis;
     const updateVoices = () => {

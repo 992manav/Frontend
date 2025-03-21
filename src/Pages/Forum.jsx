@@ -1,11 +1,23 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SupportGroupCard = ({ name, description }) => {
   const navigate = useNavigate();
 
-  const handleJoinGroup = () => {
-    navigate("/community", { state: { communityName: name } });
+  const handleJoinGroup = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/api/community/getcommunitydiscussion/${name}`
+      );
+
+      navigate("/community", {
+        state: { communityName: name, discussions: response.data },
+      });
+    } catch (error) {
+      console.error("Error fetching discussions:", error);
+      navigate("/community", { state: { communityName: name, discussions: [] } });
+    }
   };
 
   return (
@@ -50,7 +62,7 @@ const Forum = () => {
   );
 
   return (
-    <div className="px-6 py-12 font-barlow bg-gradient-to-b from-[#ffcbc2]  via-[#fcd2ca] to-[#FFFFFF]">
+    <div className="px-6 py-12 font-barlow bg-gradient-to-b from-[#ffcbc2] via-[#fcd2ca] to-[#FFFFFF]">
       <header className="text-center mb-12">
         <h1 className="text-5xl font-extrabold text-gray-900">
           Find Your <span className="text-[#fe7856]">Support</span> Community
