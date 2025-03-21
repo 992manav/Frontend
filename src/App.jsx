@@ -14,6 +14,7 @@ import { VideoCall } from "./Components/VideoCall";
 import DoctorProfile from "./Pages/DoctorProfile";
 import Forum from "./Pages/Forum";
 import CheckPatient from "./Pages/CheckPatient";
+import AboutUs from "./Pages/AboutUs";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/videocall" element={<VideoCall />} />
         <Route path="/doctorprofile" element={<DoctorProfile />} />
         <Route path="/forum" element={<Forum />} />
+        <Route path="/aboutus" element={<AboutUs />}></Route>
       </Routes>
     </Router>
   );
