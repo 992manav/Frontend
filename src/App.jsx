@@ -8,8 +8,11 @@ import LandingPage from "./Pages/LandingPage";
 import Navbar from "./Components/Navbar";
 import UserProfile from "./Pages/UserProfile";
 import AIDiagnose from "./Pages/AIDiagnose";
-import DoctorProfile from "./Pages/DoctorProfile";
 import UploadMedicalRecord from "./Pages/UploadMedicalRecord";
+import ReportPage from "./Pages/ReportPage";
+import { VideoCall } from "./Components/VideoCall";
+import DoctorProfile from "./Pages/DoctorProfile";
+import Forum from "./Pages/Forum";
 import CheckPatient from "./Pages/CheckPatient";
 
 function App() {
@@ -28,7 +31,10 @@ function App() {
         <Route path="/checkpatient/:patientID" element={<CheckPatient />} />
         <Route path="/doctorprofile" element={<DoctorProfile />} />
         <Route path="/uploadmedicalrecord" element={<UploadMedicalRecord />} />
+        <Route path="/reportpage/:reportId" element={<ReportPage />} />
+        <Route path="/videocall" element={<VideoCall />} />
         <Route path="/doctorprofile" element={<DoctorProfile />} />
+        <Route path="/forum" element={<Forum />} />
       </Routes>
     </Router>
   );

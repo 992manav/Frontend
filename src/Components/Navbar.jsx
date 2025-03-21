@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/logo.jpeg";
+import logo from "../assets/Screenshot_2025-03-21_183855-removebg-preview.png";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ export default function Navbar() {
         src={logo}
         alt=""
         onClick={() => navigate("/")}
-        className="w-12 h-12 cursor-pointer"
+        className="w-16 h-16 cursor-pointer overflow-hidden"
       />
 
       {/* Navigation Links */}
