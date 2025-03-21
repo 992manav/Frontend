@@ -45,7 +45,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   const buttons = [
-    { label: "Consult a Doctor", hoverText: "Connect with a doctor", path: "/contactdoctor" },
+    { label: "Consult a Doctor", hoverText: "Connect with a doctor", path: "/consultdoctor" },
     { label: "AI Diagnosis", hoverText: "Get a medical diagnosis", path: "/aidiagnose" },
     { label: "Support Groups", hoverText: "Join health discussions", path: "/forum" },
     { label: "Upload Medical Record", hoverText: "Upload your medical records and prescription", path: "/uploadmedicalrecord" }
