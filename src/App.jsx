@@ -4,6 +4,7 @@ import Signup from "./Pages/Signup";
 import { toast, Toaster } from "react-hot-toast";
 import LandingPage from './Pages/LandingPage';
 import Navbar from './Components/Navbar';
+import AIDiagnose from "./Pages/AIDiagnose";
 
 
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/aidiagnose" element={<AIDiagnose />} />
       </Routes>
     </Router>
   );
