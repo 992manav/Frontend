@@ -219,7 +219,7 @@ const AIDiagnose = () => {
                 name="symptoms"
                 value={formData.symptoms}
                 onChange={handleChange}
-                className="w-full bg-[#f8cbc3] px-4 py-3 border border-[#f47f62] rounded-lg focus:ring-2 focus:ring-[#f47f62] focus:border-[#f47f62] outline-none"
+                className="w-full  px-4 py-3 bg-[#ffcbc2] border border-[#f47f62] rounded-lg focus:ring-2 focus:ring-[#f47f62] focus:border-[#f47f62] outline-none"
                 rows="4"
                 placeholder="Describe your symptoms..."
               />
