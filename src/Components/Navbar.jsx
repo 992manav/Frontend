@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-//import logo from "../assests/logo.png";
+import logo from "../assets/logo.jpeg";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function Navbar() {
         Jeevanya
       </h1> */}
       <img
-        //src={logo}
+        src={logo}
         alt=""
         onClick={() => navigate("/")}
         className="w-12 h-12 cursor-pointer"

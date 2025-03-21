@@ -6,6 +6,7 @@ import LandingPage from "./Pages/LandingPage";
 import Navbar from "./Components/Navbar";
 import UserProfile from "./Pages/UserProfile";
 import AIDiagnose from "./Pages/AIDiagnose";
+import DoctorProfile from "./Pages/DoctorProfile";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/aidiagnose" element={<AIDiagnose />} />
+        <Route path="/doctorprofile" element={<DoctorProfile />} />
       </Routes>
     </Router>
   );
