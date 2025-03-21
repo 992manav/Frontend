@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const DoctorProfile = () => {
   const navigate = useNavigate();
   const [docinfo, setDocinfo] = useState(null);
-  const [patients, setPatients] = useState([]);
+  const [reports, setReports] = useState([]); // ✅ Renamed state from 'patients' to 'reports'
 
   const docprofile = async () => {
     try {
@@ -20,22 +20,23 @@ const DoctorProfile = () => {
     }
   };
 
-  const getPatients = async () => {
+  const getReports = async () => {
+    // ✅ Renamed function from 'getPatients' to 'getReports'
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/report/getpatients",
+        "http://localhost:3000/api/report/getreports", // ✅ Updated API route
         { withCredentials: true }
       );
-      console.log("Patients Data:", response.data.report);
-      setPatients(response.data.report || []);
+      console.log("Reports Data:", response.data.report);
+      setReports(response.data.report || []); // ✅ Updating 'reports' state
     } catch (err) {
-      console.error("Error fetching patients:", err);
+      console.error("Error fetching reports:", err);
     }
   };
 
   useEffect(() => {
     docprofile();
-    getPatients();
+    getReports(); // ✅ Calling the renamed function
   }, []);
 
   return (
@@ -90,56 +91,62 @@ const DoctorProfile = () => {
         </div>
       </div>
 
-      {/* Main Patients Section */}
+      {/* Main Reports Section */}
       <div className="w-3/4">
         <div className="bg-white rounded-lg shadow p-6">
-          {patients.length === 0 ? (
-            <p className="text-gray-600 text-center">No patients found</p>
+          {reports.length === 0 ? (
+            <p className="text-gray-600 text-center">No reports found</p>
           ) : (
-            patients.map((patient) => (
-              <div
-                key={patient._id}
-                onClick={() => navigate(`/checkpatient/${patient._id}`)}
-                className="cursor-pointer mb-6 border rounded-lg p-6 hover:bg-sky-50 transition"
-              >
-                <h3 className="text-lg font-semibold mb-4">
-                  Patient Name:{" "}
-                  <span className="text-gray-600">
-                    {patient.patient?.name || "Unknown"}
-                  </span>
-                </h3>
+            reports.map(
+              (
+                report // ✅ Corrected 'patients.map()' to 'reports.map()'
+              ) => (
+                <div
+                  key={report._id} // ✅ Using 'report._id' instead of 'patient._id'
+                  onClick={() =>
+                    navigate(`/checkpatient/${report.patient?._id}`)
+                  }
+                  className="cursor-pointer mb-6 border rounded-lg p-6 hover:bg-sky-50 transition"
+                >
+                  <h3 className="text-lg font-semibold mb-4">
+                    Patient Name:{" "}
+                    <span className="text-gray-600">
+                      {report.patient?.name || "Unknown"}
+                    </span>
+                  </h3>
 
-                <div className="grid grid-cols-2 gap-6">
-                  {/* Diagnosis Section */}
-                  <div className="bg-sky-100 rounded-lg p-6 h-full">
-                    <h4 className="text-center text-lg font-medium mb-4">
-                      Diagnosis
-                    </h4>
-                    <div className="mb-4 border h-28 rounded-2xl text-center flex items-center justify-center p-2">
-                      {patient.diagnosis || "Not yet diagnosed"}
+                  <div className="grid grid-cols-2 gap-6">
+                    {/* Diagnosis Section */}
+                    <div className="bg-sky-100 rounded-lg p-6 h-full">
+                      <h4 className="text-center text-lg font-medium mb-4">
+                        Diagnosis
+                      </h4>
+                      <div className="mb-4 border h-28 rounded-2xl text-center flex items-center justify-center p-2">
+                        {report.diagnosis || "Not yet diagnosed"}
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Prescription Section */}
-                  <div className="bg-sky-100 rounded-lg p-6 h-full">
-                    <h4 className="text-center text-lg font-medium mb-4">
-                      Prescription
-                    </h4>
-                    <div className="mb-4 border h-28 rounded-2xl text-center p-2">
-                      {patient.medications?.length > 0 ? (
-                        <ul className="list-disc list-inside">
-                          {patient.medications.map((med, index) => (
-                            <li key={index}>{med}</li>
-                          ))}
-                        </ul>
-                      ) : (
-                        "No prescription yet"
-                      )}
+                    {/* Prescription Section */}
+                    <div className="bg-sky-100 rounded-lg p-6 h-full">
+                      <h4 className="text-center text-lg font-medium mb-4">
+                        Prescription
+                      </h4>
+                      <div className="mb-4 border h-28 rounded-2xl text-center p-2">
+                        {report.medications?.length > 0 ? (
+                          <ul className="list-disc list-inside">
+                            {report.medications.map((med, index) => (
+                              <li key={index}>{med}</li>
+                            ))}
+                          </ul>
+                        ) : (
+                          "No prescription yet"
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))
+              )
+            )
           )}
         </div>
       </div>
