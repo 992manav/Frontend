@@ -24,6 +24,15 @@ export default function Navbar() {
       {/* Navigation Links */}
       <div className="flex space-x-8 text-md text-gray-700">
         <button
+          onClick={() => navigate("/emergency")}
+          className="font-bold text-xl cursor-pointer hover:scale-110 transition duration-300 ease-in-out"
+        >
+          <div className="-space-y-2">
+            <p>Help!</p>
+            <p>Someone</p>
+          </div>
+        </button>
+        <button
           onClick={() => navigate("/about")}
           className="font-bold text-xl cursor-pointer hover:scale-110 transition duration-300 ease-in-out"
         >
