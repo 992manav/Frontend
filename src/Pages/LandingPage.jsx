@@ -98,7 +98,7 @@ const LandingPage = () => {
             Experience seamless healthcare with AI-driven diagnosis, instant doctor consultations, and hassle-free medicine purchases—all in one platform. Our smart system empowers you with accurate insights, personalized care, and easy access to trusted medical professionals. Stay ahead of your wellness journey with cutting-edge technology and expert guidance.</p>
 
             {/* Service Buttons */}
-            <div className="flex gap-8 px-6 w-full justify-center text-[#1B263B]">
+            <div className="flex gap-8 w-full justify-center text-[#1B263B]">
                 {buttons.map((button, index) => (
                     <motion.div
                     key={index}

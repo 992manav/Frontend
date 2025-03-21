@@ -262,7 +262,7 @@ const AIDiagnose = () => {
                   max="10"
                   value={formData.painLevel}
                   onChange={handleChange}
-                  className="w-full range range-accent range-sm"
+                  className="w-full range range-accent accent-[#f8b4a3]  range-sm"
                 />
               </div>
             </div>
@@ -296,7 +296,7 @@ const AIDiagnose = () => {
                       </svg>
                       <div className="flex text-sm text-slate-600">
                         <label className="relative cursor-pointer bg-white rounded-md font-medium text-[#f47f62] hover:text-[#f47f62] focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-teal-500">
-                          <span>Upload a file</span>
+                          <span className="p-2">Upload a file</span>
                           <input
                             type="file"
                             accept="image/*"

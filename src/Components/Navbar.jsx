@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-//import logo from "../assests/logo.png";
+import logo from "../assets/Screenshot_2025-03-21_183855-removebg-preview.png";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -15,14 +15,23 @@ export default function Navbar() {
         Jeevanya
       </h1> */}
       <img
-        //src={logo}
+        src={logo}
         alt=""
         onClick={() => navigate("/")}
-        className="w-12 h-12 cursor-pointer"
+        className="w-16 h-16 cursor-pointer overflow-hidden"
       />
 
       {/* Navigation Links */}
       <div className="flex space-x-8 text-md text-gray-700">
+        <button
+          onClick={() => navigate("/emergency")}
+          className="font-bold text-xl cursor-pointer hover:scale-110 transition duration-300 ease-in-out"
+        >
+          <div className="-space-y-2">
+            <p>Help</p>
+            <p>Someone!</p>
+          </div>
+        </button>
         <button
           onClick={() => navigate("/about")}
           className="font-bold text-xl cursor-pointer hover:scale-110 transition duration-300 ease-in-out"

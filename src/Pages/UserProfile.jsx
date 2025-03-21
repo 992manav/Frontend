@@ -21,7 +21,7 @@ const UserProfile = () => {
   const getProfile = async () => {
     try {
       const response = await axios.get(
-        "https://jeevanya-back.vercel.app/api/auth/getprofile",
+        "http://localhost:3000/api/auth/getprofile",
         { withCredentials: true }
       );
       setUserData(response.data);
@@ -33,7 +33,7 @@ const UserProfile = () => {
   const getReports = async () => {
     try {
       const response = await axios.get(
-        "https://jeevanya-back.vercel.app/api/report/getreportbyuser",
+        "http://localhost:3000/api/report/getreportbyuser",
         { withCredentials: true }
       );
       setReports(response.data);
@@ -158,7 +158,7 @@ const UserProfile = () => {
                     <p>{report.date_of_creation.slice(0, 10)}</p>
                   </div>
                   <div>
-                    <p className="font-bold">Reason</p>
+                    <p className="font-bold text-center">Reason</p>
                     <p>{report.symptoms}</p>
                   </div>
                 </motion.div>
