@@ -2,15 +2,15 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import { toast, Toaster } from "react-hot-toast";
-import LandingPage from './Pages/LandingPage';
 import ConsultDoctor from "./Pages/ConsultDoctor";
 import FirstConsult from "./Pages/FirstConsult";
-import Navbar from './Components/Navbar';
-
-
+import LandingPage from "./Pages/LandingPage";
+import Navbar from "./Components/Navbar";
+import UserProfile from "./Pages/UserProfile";
+import AIDiagnose from "./Pages/AIDiagnose";
+import UploadMedicalRecord from "./Pages/UploadMedicalRecord";
 
 function App() {
-
   return (
     <Router>
       <Navbar />
@@ -21,6 +21,9 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/consultdoctor" element={<ConsultDoctor />} />
         <Route path="/firstconsult" element={<FirstConsult />}></Route>
+        <Route path="/userprofile" element={<UserProfile />} />
+        <Route path="/aidiagnose" element={<AIDiagnose />} />
+        <Route path="/uploadmedicalrecord" element={<UploadMedicalRecord />} />
       </Routes>
     </Router>
   );
