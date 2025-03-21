@@ -5,6 +5,7 @@ import { toast, Toaster } from "react-hot-toast";
 import LandingPage from "./Pages/LandingPage";
 import Navbar from "./Components/Navbar";
 import UserProfile from "./Pages/UserProfile";
+import AIDiagnose from "./Pages/AIDiagnose";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/userprofile" element={<UserProfile />} />
+        <Route path="/aidiagnose" element={<AIDiagnose />} />
       </Routes>
     </Router>
   );
