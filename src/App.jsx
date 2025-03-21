@@ -1,15 +1,13 @@
-import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from './Pages/Login';
-import Signup from './Pages/Signup';
-import { toast, Toaster } from "react-hot-toast"; 
+import Login from "./Pages/Login";
+import Signup from "./Pages/Signup";
+import { toast, Toaster } from "react-hot-toast";
 import LandingPage from './Pages/LandingPage';
 import Navbar from './Components/Navbar';
 
 
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <Router>
@@ -21,7 +19,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
       </Routes>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

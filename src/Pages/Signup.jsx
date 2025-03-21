@@ -4,6 +4,7 @@ import axios from "axios";
 import patient from "../assets/patient.webp";
 import doctor from "../assets/doctor.avif";
 import { useNavigate } from "react-router-dom";
+import { toast, Toaster } from "react-hot-toast";
 
 export default function Signup() {
   const [userType, setUserType] = useState("patient");
@@ -43,8 +44,10 @@ export default function Signup() {
     try {
       const response = await axios.post(endpoint, formData);
       console.log("Signup Successful:", response.data);
+      toast.success("Signup successful!");
       navigate("/login");
     } catch (err) {
+      toast.error("Signup Failed");
       setError(err.response?.data?.message || "Signup failed");
     }
   };
@@ -213,6 +216,7 @@ export default function Signup() {
                 )}
               </div>
               {userType === "patient" ? (
+                <div>
                 <button
                   type="button"
                   onClick={() => setStep(2)}
@@ -220,13 +224,34 @@ export default function Signup() {
                 >
                   Next
                 </button>
+                <p className="text-center text-gray-600 mt-4 text-sm">
+                  Allready have an account?{" "}
+                  <button
+                    onClick={() => navigate("/login")}
+                    className="text-[#FAAB98] font-bold cursor-pointer hover:underline hover:text-[#f47f62]"
+                  >
+                    Login
+                  </button>
+                </p>
+                </div>
               ) : (
-                <button
-                  type="submit"
-                  className="mt-6 w-full bg-[#FAAB98] text-black py-2 rounded-lg font-bold hover:bg-[#f47f62] transition"
-                >
-                  Sign Up
-                </button>
+                <div>
+                  <button
+                    type="submit"
+                    className="mt-6 w-full bg-[#FAAB98] text-black py-2 rounded-lg font-bold hover:bg-[#f47f62] transition"
+                  >
+                    Sign Up
+                  </button>
+                  <p className="text-center text-gray-600 mt-4 text-sm">
+                    Allready have an account?{" "}
+                    <button
+                      onClick={() => navigate("/login")}
+                      className="text-[#FAAB98] font-bold cursor-pointer hover:underline hover:text-[#f47f62]"
+                    >
+                      Login
+                    </button>
+                  </p>
+                </div>
               )}
             </motion.form>
           )}
@@ -294,6 +319,7 @@ export default function Signup() {
               >
                 Sign Up
               </button>
+              
             </motion.form>
           )}
         </motion.div>
