@@ -10,6 +10,8 @@ import UserProfile from "./Pages/UserProfile";
 import AIDiagnose from "./Pages/AIDiagnose";
 import UploadMedicalRecord from "./Pages/UploadMedicalRecord";
 import DoctorProfile from "./Pages/DoctorProfile";
+import Forum from "./Pages/Forum";
+
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
         <Route path="/aidiagnose" element={<AIDiagnose />} />
         <Route path="/uploadmedicalrecord" element={<UploadMedicalRecord />} />
         <Route path="/doctorprofile" element={<DoctorProfile />} />
+        <Route path="/forum" element={<Forum />} />
+        
       </Routes>
     </Router>
   );
