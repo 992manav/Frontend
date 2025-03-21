@@ -28,8 +28,8 @@ export default function Navbar() {
           className="font-bold text-xl cursor-pointer hover:scale-110 transition duration-300 ease-in-out"
         >
           <div className="-space-y-2">
-            <p>Help!</p>
-            <p>Someone</p>
+            <p>Help</p>
+            <p>Someone!</p>
           </div>
         </button>
         <button

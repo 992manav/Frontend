@@ -478,9 +478,15 @@ const EmergencyPage = () => {
                   <FaNotesMedical className="mr-2 text-[#c94a4a]" />
                   Doctor's Notes
                 </h4>
-                <p className="bg-white p-3 rounded-lg shadow-sm">
-                  {randomDoctorNote || "No doctor's notes available."}
-                </p>
+                {searchResults.medicalHistory ? (
+                  <p className="bg-white p-3 rounded-lg shadow-sm">
+                    {randomDoctorNote}
+                  </p>
+                ): (
+                  <p className="bg-white p-3 rounded-lg shadow-sm">
+                    No doctor's notes available.
+                  </p>
+                )}
               </div>
             </div>
           </motion.div>
