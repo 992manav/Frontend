@@ -7,6 +7,7 @@ import Navbar from "./Components/Navbar";
 import UserProfile from "./Pages/UserProfile";
 import AIDiagnose from "./Pages/AIDiagnose";
 import UploadMedicalRecord from "./Pages/UploadMedicalRecord";
+import DoctorProfile from "./Pages/DoctorProfile";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/aidiagnose" element={<AIDiagnose />} />
         <Route path="/uploadmedicalrecord" element={<UploadMedicalRecord />} />
+        <Route path="/doctorprofile" element={<DoctorProfile />} />
       </Routes>
     </Router>
   );
