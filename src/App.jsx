@@ -10,6 +10,11 @@ import UserProfile from "./Pages/UserProfile";
 import AIDiagnose from "./Pages/AIDiagnose";
 import UploadMedicalRecord from "./Pages/UploadMedicalRecord";
 import Emergency from "./Pages/Emergency";
+import ReportPage from "./Pages/ReportPage";
+import { VideoCall } from "./Components/VideoCall";
+import DoctorProfile from "./Pages/DoctorProfile";
+import Forum from "./Pages/Forum";
+
 
 function App() {
   return (
@@ -26,6 +31,10 @@ function App() {
         <Route path="/aidiagnose" element={<AIDiagnose />} />
         <Route path="/uploadmedicalrecord" element={<UploadMedicalRecord />} />
         <Route path="/emergency" element={<Emergency />}></Route>
+        <Route path="/reportpage/:reportId" element={<ReportPage />} />
+        <Route path="/videocall" element={<VideoCall />} />
+        <Route path="/doctorprofile" element={<DoctorProfile />} />
+        <Route path="/forum" element={<Forum />} />
       </Routes>
     </Router>
   );
