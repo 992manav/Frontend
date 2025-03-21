@@ -10,18 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
-=======
     "axios": "^1.8.4",
->>>>>>> e5c84bd37e69f51df8f1dc2e431e73a4d00ce528
     "framer-motion": "^12.5.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hot-toast": "^2.5.2",
-<<<<<<< HEAD
     "react-icons": "^5.5.0",
-=======
->>>>>>> e5c84bd37e69f51df8f1dc2e431e73a4d00ce528
     "react-router-dom": "^7.4.0"
   },
   "devDependencies": {
