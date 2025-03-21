@@ -1,16 +1,13 @@
-import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from './Pages/Login';
-import Signup from './Pages/Signup';
-import { toast, Toaster } from "react-hot-toast"; 
-import LandingPage from './Pages/LandingPage';
-import Navbar from './Components/Navbar';
-
-
+import Login from "./Pages/Login";
+import Signup from "./Pages/Signup";
+import { toast, Toaster } from "react-hot-toast";
+import LandingPage from "./Pages/LandingPage";
+import Navbar from "./Components/Navbar";
+import UserProfile from "./Pages/UserProfile";
+import AIDiagnose from "./Pages/AIDiagnose";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <Router>
       <Navbar />
@@ -19,9 +16,11 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/userprofile" element={<UserProfile />} />
+        <Route path="/aidiagnose" element={<AIDiagnose />} />
       </Routes>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;
