@@ -187,7 +187,7 @@ const LandingPage = () => {
         onClick={() => {
           navigate("/emergency");
         }}
-        className="mt-16 bg-[#c94a4a] text-center text-white p-5 rounded-xl shadow-lg shadow-gray-600 text-xl font-bold hover:cursor-pointer"
+        className="mt-16 bg-[#c94a4a] text-center text-white p-5 rounded-xl  text-xl font-bold hover:cursor-pointer hover:shadow-lg hover:shadow-gray-600"
       >
         Help Someone!
       </div>

@@ -159,7 +159,11 @@ const UserProfile = () => {
                   </div>
                   <div>
                     <p className="font-bold text-center">Reason</p>
-                    <p>{report.symptoms}</p>
+                    <p>
+                      {report.symptoms.length > 20
+                        ? report.symptoms.substring(0, 20) + "..."
+                        : report.symptoms}
+                    </p>
                   </div>
                 </motion.div>
               ))
