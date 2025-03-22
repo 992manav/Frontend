@@ -115,7 +115,7 @@ export const MyUI = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-between w-full h-screen bg-[#C7E9FF] text-black">
+    <div className="flex flex-col items-center justify-between w-full h-screen bg-[#fcd0c4] text-black">
       {/* Header */}
       <div className="w-full p-4 flex justify-between items-center bg-white shadow-md">
         <h2 className="text-xl font-medium">

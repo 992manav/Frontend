@@ -4,6 +4,7 @@ import { FcVideoCall } from "react-icons/fc";
 import { motion } from "framer-motion";
 import { FaFilePrescription, FaNotesMedical, FaUserMd } from "react-icons/fa";
 import axios from "axios";
+import Chat from "../Components/Chat";
 
 const CheckPatient = ({ userData }) => {
   const [patientData, setPatientData] = useState(null);
@@ -17,7 +18,7 @@ const CheckPatient = ({ userData }) => {
   const navigate = useNavigate();
   const { patientID } = useParams();
 
-  console.log("Patient ID:", patientID);
+  //console.log("Patient ID:", patientID);
 
   // ✅ Fetch Patient Details including Report
   const getPatientDetails = async () => {
@@ -233,8 +234,8 @@ const CheckPatient = ({ userData }) => {
               onClick={() => navigate("/videocall")}
             />
           </motion.div>
-          {/* <Chat receiver={report.doctor._id} sender={report.patient._id} /> */}
         </div>
+        <Chat receiver={report?.patient} sender={report?.doctor} />
       </motion.div>
 
       {/* ✅ Display Past Medical History */}

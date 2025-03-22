@@ -39,7 +39,7 @@ const Chat = ({receiver,sender}) => {
           className={`p-3 rounded-lg max-w-[50%] mb-3 ${
             msg.sender === sender
               ? "ml-auto bg-[#f5c3b5] border-2 border-black text-gray-800" // Sender's message
-              : "mr-auto bg-blue-100 border-2 border-black text-gray-800" // Receiver's message
+              : "mr-auto bg-slate-200 border-2 border-black text-gray-800" // Receiver's message
           }`}
         >
           {msg.message}
