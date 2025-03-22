@@ -5,7 +5,7 @@ import logo from "../assets/Screenshot_2025-03-21_183855-removebg-preview.png";
 export default function Navbar() {
   const navigate = useNavigate();
   return (
-    <div className="flex justify-between items-center px-12  bg-[#fcd0c4] ">
+    <div className="flex justify-between items-center px-12 py-4 bg-[#fcd0c4] ">
       {/* Logo */}
       {/* <h1
         onClick={() => navigate("/")}
@@ -23,7 +23,7 @@ export default function Navbar() {
 
       {/* Navigation Links */}
       <div className="flex space-x-8 text-md text-gray-700">
-        {/* <button
+        <button
           onClick={() => navigate("/emergency")}
           className="font-bold text-xl cursor-pointer hover:scale-110 transition duration-300 ease-in-out"
         >
@@ -31,7 +31,7 @@ export default function Navbar() {
             <p>Help</p>
             <p>Someone!</p>
           </div>
-        </button> */}
+        </button>
         <button
           onClick={() => navigate("/aboutus")}
           className="font-bold text-xl cursor-pointer hover:scale-110 transition duration-300 ease-in-out"
