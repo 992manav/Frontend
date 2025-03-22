@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const DoctorProfile = () => {
   const navigate = useNavigate();
   const [docinfo, setDocinfo] = useState(null);
-  const [reports, setReports] = useState([]); // ✅ Renamed state from 'patients' to 'reports'
+  const [reports, setReports] = useState([]);
 
   const docprofile = async () => {
     try {
@@ -21,14 +21,13 @@ const DoctorProfile = () => {
   };
 
   const getReports = async () => {
-    // ✅ Renamed function from 'getPatients' to 'getReports'
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/report/getreports", // ✅ Updated API route
+        "http://localhost:3000/api/report/getreports",
         { withCredentials: true }
       );
       console.log("Reports Data:", response.data.report);
-      setReports(response.data.report || []); // ✅ Updating 'reports' state
+      setReports(response.data.report || []);
     } catch (err) {
       console.error("Error fetching reports:", err);
     }
@@ -36,7 +35,7 @@ const DoctorProfile = () => {
 
   useEffect(() => {
     docprofile();
-    getReports(); // ✅ Calling the renamed function
+    getReports();
   }, []);
 
   return (
@@ -114,7 +113,7 @@ const DoctorProfile = () => {
             <div className="grid gap-6">
               {reports.map((report) => (
                 <div
-                  key={report._id} // ✅ Corrected key reference
+                  key={report._id}
                   onClick={() =>
                     navigate(`/checkpatient/${report.patient._id}`)
                   }
@@ -132,7 +131,10 @@ const DoctorProfile = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Symptoms Section */}
                     <div className="bg-gradient-to-br from-[#FAAB98] to-[#f8c0b2] rounded-xl shadow-sm p-6 h-full">
-                      <h4 className="text-center text-lg font-semibold mb-4 text-gray-800">
+                      <h4 className="text-center text-lg font-semibold mb-4 text-gray-800 flex items-center justify-center">
+                        <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                        </svg>
                         Symptoms
                       </h4>
                       <div className="mb-2 bg-white bg-opacity-70 border border-[#f0c9bf] h-28 rounded-xl flex items-center justify-center p-4 shadow-sm">
@@ -144,7 +146,10 @@ const DoctorProfile = () => {
 
                     {/* Prescription Section */}
                     <div className="bg-gradient-to-br from-[#FAAB98] to-[#f8c0b2] rounded-xl shadow-sm p-6 h-full">
-                      <h4 className="text-center text-lg font-semibold mb-4 text-gray-800">
+                      <h4 className="text-center text-lg font-semibold mb-4 text-gray-800 flex items-center justify-center">
+                        <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        </svg>
                         Prescription
                       </h4>
                       <div className="mb-2 bg-white bg-opacity-70 border border-[#f0c9bf] h-28 rounded-xl p-4 shadow-sm overflow-y-auto">
