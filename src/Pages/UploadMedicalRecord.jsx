@@ -112,7 +112,7 @@ const UploadMedicalRecord = () => {
       formatSummary(rawText);
     } catch (error) {
       console.error("Analysis error:", error);
-      alert("Failed to process request. Please try again.");
+      toast.error("Failed to process request. Please try again.");
     } finally {
       setLoading(false);
       setOcrProgress(0);
@@ -133,7 +133,7 @@ const UploadMedicalRecord = () => {
           const response = await axios.post(
             `http://localhost:3000/api/patient/setmedicalrecord`,
             {
-              medicalHistory: doctorContent, 
+              medicalHistory: doctorContent,
             },
             {
               withCredentials: true,
@@ -141,19 +141,15 @@ const UploadMedicalRecord = () => {
           );
 
           toast.success("Medical history updated successfully!");
-
         } catch (error) {
           if (error.response) {
-
             console.error(
               "Error updating medical history:",
               error.response.data.message
             );
           } else if (error.request) {
-
             console.error("No response received:", error.request);
           } else {
-
             toast.error("Error:", error.message);
           }
         }
@@ -227,7 +223,6 @@ const UploadMedicalRecord = () => {
   return (
     <div className="p-6 bg-gradient-to-b from-[#ffcbc2] via-[#ffcbc2] to-[#FFFFFF]">
       <div className="flex max-w-6xl mx-auto  bg-white shadow-xl rounded-xl p-6">
-
         <div className="w-1/2 pr-6 border-r-2 border-gray-100">
           <h2 className="text-2xl font-bold mb-6 text-[#c94a4a]">
             Medical Record Analyzer
@@ -379,8 +374,10 @@ const UploadMedicalRecord = () => {
                 >
                   {isTranslating ? (
                     <>
-                      <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
-                      </svg>
+                      <svg
+                        className="animate-spin h-4 w-4"
+                        viewBox="0 0 24 24"
+                      ></svg>
                       Translating...
                     </>
                   ) : (
@@ -448,7 +445,6 @@ const UploadMedicalRecord = () => {
                 "Patient summary will appear here..."}
             </div> */}
           </div>
-
         </div>
       </div>
       <div className="bg-white rounded-xl p-5 shadow-inner border border-gray-200 m-6">
@@ -475,8 +471,8 @@ const UploadMedicalRecord = () => {
         {summary.doctor.length > 0 ? (
           <div className="space-y-8">
             <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">
-            <h5 className="font-medium text-blue-800 mb-3">
-            {summary.doctor[0]?.title || "Diagnosis Overview"}
+              <h5 className="font-medium text-blue-800 mb-3">
+                {summary.doctor[0]?.title || "Diagnosis Overview"}
               </h5>
               <div className="whitespace-pre-wrap text-gray-800 text-sm">
                 {summary.doctor[0]?.content}

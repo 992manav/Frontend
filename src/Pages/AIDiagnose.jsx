@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import toast from "react-hot-toast";
 
 const API_KEY = "AIzaSyA_hb7cq8vwzBx8qDVQVihCPDc1RDZ1Zho";
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent?key=${API_KEY}`;
@@ -13,7 +14,7 @@ const AIDiagnose = () => {
         transition: { staggerChildren: 0.06, delayChildren: 0.02 * i },
       }),
     };
-  }
+  };
   const [formData, setFormData] = useState({
     symptoms: "",
     symptomDuration: "Hours",
@@ -182,7 +183,7 @@ const AIDiagnose = () => {
       }));
     } catch (error) {
       console.error("AI Analysis Error:", error);
-      alert("An error occurred while processing your request.");
+      toast.error("An error occurred while processing your request.");
     } finally {
       setIsLoading(false);
     }
@@ -213,7 +214,6 @@ const AIDiagnose = () => {
         Dhanvantari AI
       </h1>
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
-
         <div className="bg-white rounded-xl shadow-lg p-6">
           <h2 className="text-3xl font-bold text-slate-800 mb-6 border-b-2 border-slate-100 pb-4">
             Symptoms
@@ -349,7 +349,6 @@ const AIDiagnose = () => {
             </button>
           </div>
         </div>
-
 
         <div className="bg-white rounded-xl shadow-lg p-6 space-y-6">
           <h3 className="text-2xl font-bold text-slate-800 border-b-2 border-slate-100 pb-4">

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { FaFilePrescription, FaNotesMedical, FaUserMd } from "react-icons/fa";
 import axios from "axios";
 import Chat from "../Components/Chat";
+import toast from "react-hot-toast";
 
 const CheckPatient = ({ userData }) => {
   const [patientData, setPatientData] = useState(null);
@@ -72,29 +73,39 @@ const CheckPatient = ({ userData }) => {
     }
 
     try {
-      await axios.post(
-        `http://localhost:3000${endpoint}`,
-        {
-          reportID: report?._id,
-          message: medications.map((med) => {
-            const times = [];
-            if (med.morning) times.push("M");
-            if (med.evening) times.push("E");
-            if (med.night) times.push("N");
-            return `${med.name} (${times.join(",")})`;
-          }),
-        },
-        { withCredentials: true }
-      );
-
-      alert(`${modalType} sent successfully!`);
+      if (modalType === "Prescription") {
+        await axios.post(
+          `http://localhost:3000${endpoint}`,
+          {
+            reportID: report?._id,
+            message: medications.map((med) => {
+              const times = [];
+              if (med.morning) times.push("M");
+              if (med.evening) times.push("E");
+              if (med.night) times.push("N");
+              return `${med.name} (${times.join(",")})`;
+            }),
+          },
+          { withCredentials: true }
+        );
+      } else {
+        await axios.post(
+          `http://localhost:3000${endpoint}`,
+          {
+            reportID: report?._id,
+            message,
+          },
+          { withCredentials: true }
+        );
+      }
+      toast.success(`${modalType} sent successfully!`);
       closeModal();
     } catch (err) {
       console.log(
         `Error sending ${modalType}:`,
         err.response?.data || err.message
       );
-      alert("Failed to send. Try again.");
+      toast.error("Failed to send. Try again.");
     } finally {
       setLoading(false);
     }

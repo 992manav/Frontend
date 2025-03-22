@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const CommunityDiscussions = () => {
   const location = useLocation();
@@ -60,11 +61,11 @@ const CommunityDiscussions = () => {
         setNewTitle("");
         setNewMessage("");
       } else {
-        alert("Failed to send message.");
+        toast.error("Failed to send message.");
       }
     } catch (error) {
       console.error("Error posting discussion:", error);
-      alert("Something went wrong.");
+      toast.error("Something went wrong");
     }
   };
 
@@ -84,13 +85,13 @@ const CommunityDiscussions = () => {
       />
       <div className="relative z-10 bg-gradient-to-b  from-[#fbd8cf] to-[#FFFFFF] bg-opacity-90 min-h-screen p-8">
         <div className="max-w-6xl mx-auto">
-        <h1
-          className="text-3xl text-center mb-7 font-bold text-[#c94a4a] cursor-pointer hover:scale-110 transition duration-300 ease-in-out tracking-widest"
-          style={{ fontFamily: "Pixelcraft, sans-serif" }}
-        >
-          Community: {communityName}
-        </h1>
-          
+          <h1
+            className="text-3xl text-center mb-7 font-bold text-[#c94a4a] cursor-pointer hover:scale-110 transition duration-300 ease-in-out tracking-widest"
+            style={{ fontFamily: "Pixelcraft, sans-serif" }}
+          >
+            Community: {communityName}
+          </h1>
+
           {discussions.length === 0 ? (
             <p className="text-gray-600">No discussions available.</p>
           ) : (
@@ -114,7 +115,6 @@ const CommunityDiscussions = () => {
               </div>
             ))
           )}
-
 
           <div className="mt-6 p-4 bg-white rounded-lg shadow-md">
             <input
