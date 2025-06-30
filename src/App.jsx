@@ -17,6 +17,8 @@ import Forum from "./Pages/Forum";
 import Community from "./Pages/Community";
 import CheckPatient from "./Pages/CheckPatient";
 import AboutUs from "./Pages/AboutUs";
+import LiveAi from "./Components/LiveAi";
+import GeminiLiveClient from "./Pages/GeminiLiveClient";
 
 function App() {
   return (
@@ -38,6 +40,8 @@ function App() {
         <Route path="/reportpage/:reportId" element={<ReportPage />} />
         <Route path="/videocall" element={<VideoCall />} />
         <Route path="/doctorprofile" element={<DoctorProfile />} />
+        <Route path="/liveai" element={<LiveAi />} />
+        <Route path="/geminilive" element={<GeminiLiveClient />} />
         <Route path="/forum" element={<Forum />} />
         <Route path="/aboutus" element={<AboutUs />}></Route>
         <Route path="/community" element={<Community />} />

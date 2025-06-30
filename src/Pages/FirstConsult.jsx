@@ -29,11 +29,26 @@ const StaircaseText = ({ text, className = "" }) => {
   };
 
   return (
-    <motion.div className={className} whileInView="visible" variants={container} initial="hidden">
+    <motion.div
+      className={className}
+      whileInView="visible"
+      variants={container}
+      initial="hidden"
+    >
       {characters.map((char, index) => (
-        <motion.span key={`${char}-${index}`} variants={child} style={{ position: "relative" }}>
+        <motion.span
+          key={`${char}-${index}`}
+          variants={child}
+          style={{ position: "relative" }}
+        >
           <span style={{ visibility: "hidden" }}>{char}</span>
-          <motion.span style={{ position: "absolute", left: 0, fontFamily: "Pixelcraft, sans-serif" }}>
+          <motion.span
+            style={{
+              position: "absolute",
+              left: 0,
+              fontFamily: "Pixelcraft, sans-serif",
+            }}
+          >
             {char === " " ? "\u00A0" : char}
           </motion.span>
         </motion.span>
@@ -83,8 +98,11 @@ const FirstConsult = () => {
 
   if (!doctor) {
     return (
-      <div style={{ fontFamily: "Barlow, sans-serif" }} className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#fdd5c9] to-[#fcdcd3]">
-        <motion.div 
+      <div
+        style={{ fontFamily: "Barlow, sans-serif" }}
+        className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#fdd5c9] to-[#fcdcd3]"
+      >
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -99,8 +117,11 @@ const FirstConsult = () => {
   }
 
   return (
-    <div style={{ fontFamily: "Barlow, sans-serif" }} className="min-h-screen bg-gradient-to-br from-[#fdd5c9] to-[#fcdcd3] py-12 px-4 sm:px-6">
-      <motion.div 
+    <div
+      style={{ fontFamily: "Barlow, sans-serif" }}
+      className="min-h-screen bg-gradient-to-br from-[#fdd5c9] to-[#fcdcd3] py-12 px-4 sm:px-6"
+    >
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -109,7 +130,10 @@ const FirstConsult = () => {
         <div className="bg-gradient-to-r from-[#c94a4a] to-[#d86e6e] py-6 px-8">
           <div className="flex items-center">
             <FaUserMd className="text-white text-3xl mr-3" />
-            <StaircaseText text="MEDICAL CONSULTATION" className="text-2xl font-bold text-white" />
+            <StaircaseText
+              text="MEDICAL CONSULTATION"
+              className="text-2xl font-bold text-white"
+            />
           </div>
         </div>
 
@@ -122,41 +146,54 @@ const FirstConsult = () => {
               <h2 className="text-xl font-bold text-gray-800">
                 Dr. {doctor.name}
               </h2>
-              <p className="text-[#c94a4a] font-medium mt-1">{doctor.speciality}</p>
+              <p className="text-[#c94a4a] font-medium mt-1">
+                {doctor.speciality}
+              </p>
             </div>
-            
-            <motion.div 
+
+            <motion.div
               whileHover={{ boxShadow: "0 8px 30px rgba(0,0,0,0.12)" }}
               transition={{ duration: 0.3 }}
               className="space-y-3 bg-white p-4 rounded-lg shadow-sm"
             >
               <div className="flex justify-between border-b border-gray-100 pb-2">
                 <span className="text-gray-500">License No.</span>
-                <span className="font-medium text-gray-800">{doctor.licenseNumber}</span>
+                <span className="font-medium text-gray-800">
+                  {doctor.licenseNumber}
+                </span>
               </div>
               {doctor.hospitalId && (
                 <div className="flex justify-between border-b border-gray-100 pb-2">
                   <span className="text-gray-500">Hospital ID</span>
-                  <span className="font-medium text-gray-800">{doctor.hospitalId}</span>
+                  <span className="font-medium text-gray-800">
+                    {doctor.hospitalId}
+                  </span>
                 </div>
               )}
               <div className="flex justify-between border-b border-gray-100 pb-2">
                 <span className="text-gray-500">Email</span>
-                <span className="font-medium text-gray-800 break-all">{doctor.email}</span>
+                <span className="font-medium text-gray-800 break-all">
+                  {doctor.email}
+                </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-500">Contact</span>
-                <span className="font-medium text-gray-800">{doctor.phone_number}</span>
+                <span className="font-medium text-gray-800">
+                  {doctor.phone_number}
+                </span>
               </div>
             </motion.div>
-          </div>  
+          </div>
 
           <div className="col-span-2 p-8">
             <h2 className="text-4xl font-bold text-gray-800 mb-6">
               Describe Your Symptoms
             </h2>
             <div className="mb-6">
-              <label htmlFor="symptoms" className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="symptoms"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
                 Please provide detailed information about your symptoms
               </label>
               <textarea

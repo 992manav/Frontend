@@ -16,7 +16,9 @@ const SupportGroupCard = ({ name, description }) => {
       });
     } catch (error) {
       console.error("Error fetching discussions:", error);
-      navigate("/community", { state: { communityName: name, discussions: [] } });
+      navigate("/community", {
+        state: { communityName: name, discussions: [] },
+      });
     }
   };
 

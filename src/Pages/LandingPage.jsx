@@ -117,7 +117,7 @@ const LandingPage = () => {
       {/* Hero Section */}
       <motion.div className="flex flex-col gap-1 w-[90%] text-center mx-auto pb-0 m-0 relative">
         <motion.div
-          className="text-center justify-center flex font-gravity text-[60px] font-bold"
+          className="text-center justify-center flex font-gravity text-[40px] md:text-[60px] font-bold"
           whileInView="visible"
           variants={{
             hidden: { opacity: 0 },
@@ -126,24 +126,24 @@ const LandingPage = () => {
           initial="hidden"
         >
           <StaircaseText
-            text="VAIDYAMITRA"
-            className="font-bold text-[#c94a4a] text-8xl mb-4 mt-5 space-x-2"
+            text="JEEVANYA"
+            className="font-bold text-[#c94a4a] text-5xl md:text-8xl mb-4 mt-5 space-x-2"
           />
         </motion.div>
 
         {/* Background Image Section */}
-        <div className="relative bg-cover bg-center rounded-2xl p-10 mt-10 shadow-md flex justify-between overflow-hidden border-2 border-[#ffffff]">
+        <div className="relative bg-cover bg-center rounded-2xl p-4 md:p-10 mt-10 shadow-md flex flex-col md:flex-row justify-between overflow-hidden border-2 border-[#ffffff]">
           <img
             src={bg}
             alt="Background"
             className="absolute inset-0 w-full h-full object-cover opacity-60"
           />
 
-          <div className="mt-4 flex flex-col items-center relative z-10">
-            <h2 className="text-[40px] font-semibold text-center text-gray-800 mb-3">
+          <div className="mt-4 flex flex-col items-center relative z-10 w-full">
+            <h2 className="text-2xl md:text-[40px] font-semibold text-center text-gray-800 mb-3">
               Empowering Lives Through Health
             </h2>
-            <p className="text-center text-gray-600 max-w-2xl mx-auto mb-10">
+            <p className="text-center text-gray-600 max-w-2xl mx-auto mb-10 text-base md:text-lg">
               Experience seamless healthcare with AI-driven diagnosis, instant
               doctor consultations, and hassle-free medicine purchases—all in
               one platform. Our smart system empowers you with accurate
@@ -153,16 +153,16 @@ const LandingPage = () => {
             </p>
 
             {/* Service Buttons */}
-            <div className="flex gap-8 w-full justify-center text-[#1B263B]">
+            <div className="flex flex-col md:flex-row gap-4 md:gap-8 w-full justify-center text-[#1B263B]">
               {buttons.map((button, index) => (
                 <motion.div
                   key={index}
-                  className="w-[280px] from-[#f8b4a3] to-[#f5c3b6] p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-lg border-2 border-gray-100 flex flex-col items-center justify-center cursor-pointer h-[150px] "
+                  className="w-full md:w-[280px] from-[#f8b4a3] to-[#f5c3b6] p-6 md:p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-lg border-2 border-gray-100 flex flex-col items-center justify-center cursor-pointer h-[120px] md:h-[150px] mb-4 md:mb-0 relative"
                   whileHover={{ scale: 1.05 }}
                   onClick={() => navigate(button.path)}
                 >
                   <motion.h3
-                    className="text-2xl font-semibold text-center absolute text-[#1B263B]"
+                    className="text-lg md:text-2xl font-semibold text-center absolute text-[#1B263B]"
                     initial={{ opacity: 1 }}
                     whileHover={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
@@ -170,7 +170,7 @@ const LandingPage = () => {
                     {button.label}
                   </motion.h3>
                   <motion.p
-                    className="text-lg text-gray-700 font-barlow leading-relaxed text-center opacity-0 absolute"
+                    className="text-base md:text-lg text-gray-700 font-barlow leading-relaxed text-center opacity-0 absolute"
                     initial={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
                   >
@@ -187,38 +187,38 @@ const LandingPage = () => {
         onClick={() => {
           navigate("/emergency");
         }}
-        className="mt-16 bg-[#c94a4a] text-center text-white p-5 rounded-xl  text-xl font-bold hover:cursor-pointer hover:shadow-lg hover:shadow-gray-600"
+        className="mt-10 md:mt-16 bg-[#c94a4a] text-center text-white p-4 md:p-5 rounded-xl text-lg md:text-xl font-bold hover:cursor-pointer hover:shadow-lg hover:shadow-gray-600"
       >
         Help Someone!
       </div>
 
       {/* Services Section */}
-      <div className="mt-16">
-        <h2 className="text-3xl font-semibold text-center text-gray-800 mb-3">
+      <div className="mt-10 md:mt-16">
+        <h2 className="text-2xl md:text-3xl font-semibold text-center text-gray-800 mb-3">
           Our Services
         </h2>
-        <p className="text-center text-gray-600 max-w-2xl mx-auto mb-10">
+        <p className="text-center text-gray-600 max-w-2xl mx-auto mb-6 md:mb-10 text-base md:text-lg">
           Comprehensive healthcare solutions designed to empower you on your
           wellness journey.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {services.map((service, index) => (
             <div
               key={index}
-              className={`${service.bgColor} p-8 rounded-xl shadow-md transition-all duration-300 hover:shadow-lg border border-gray-100`}
+              className={`${service.bgColor} p-6 md:p-8 rounded-xl shadow-md transition-all duration-300 hover:shadow-lg border border-gray-100`}
             >
-              <div className="flex justify-center mb-6">
+              <div className="flex justify-center mb-4 md:mb-6">
                 <div
-                  className={`p-4 rounded-full ${service.iconColor} bg-white shadow-sm`}
+                  className={`p-3 md:p-4 rounded-full ${service.iconColor} bg-white shadow-sm`}
                 >
                   {service.icon}
                 </div>
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-gray-800">
+              <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-4 text-gray-800">
                 {service.title}
               </h3>
-              <p className="text-gray-700 font-barlow leading-relaxed">
+              <p className="text-gray-700 font-barlow leading-relaxed text-sm md:text-base">
                 {service.description}
               </p>
             </div>

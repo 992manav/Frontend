@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { toast, Toaster } from "react-hot-toast"; 
+import { toast, Toaster } from "react-hot-toast";
 import patient from "../assets/patient.webp";
 import doctor from "../assets/doctor.avif";
 
@@ -10,7 +10,7 @@ export default function Login() {
   const [userType, setUserType] = useState("patient");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [licenseNumber, setLicenseNumber] = useState(""); 
+  const [licenseNumber, setLicenseNumber] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -19,12 +19,10 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-
     const endpoint =
       userType === "patient"
         ? "http://localhost:3000/api/auth/loginpatient"
         : "http://localhost:3000/api/auth/logindoctor";
-
 
     const payload =
       userType === "patient"
@@ -36,15 +34,15 @@ export default function Login() {
         withCredentials: true,
       });
       console.log("Login Successful:", response.data);
-      
 
-      toast.success(`${userType === "patient" ? "Patient" : "Doctor"} login successful!`);
-
+      toast.success(
+        `${userType === "patient" ? "Patient" : "Doctor"} login successful!`
+      );
 
       if (userType === "patient") {
-        navigate("/"); 
+        navigate("/");
       } else {
-        navigate("/doctorprofile"); 
+        navigate("/doctorprofile");
       }
     } catch (err) {
       toast.error("Login Failed");
@@ -53,9 +51,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#ffcbc2] to-[#FFFFFF] p-6">
-      
       <div className="bg-gradient-to-b from-[#fac9c0] to-[#FFFFFF] shadow-xl rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8 max-w-4xl w-full">
-
         <motion.div
           initial={false}
           animate={{ x: userType === "patient" ? 0 : -20, opacity: 1 }}
@@ -71,14 +67,12 @@ export default function Login() {
           />
         </motion.div>
 
-
         <motion.div
           initial={false}
           animate={{ x: userType === "patient" ? 0 : 20, opacity: 1 }}
           transition={transition}
           className="flex-1 max-w-md w-full"
         >
-
           <div className="flex justify-center gap-4 mb-6">
             <div className="relative flex bg-gray-200 rounded-full p-1">
               <button
@@ -103,14 +97,13 @@ export default function Login() {
             </div>
           </div>
 
-
           <motion.form
             onSubmit={handleLogin}
             initial={false}
             animate={{ x: 0, opacity: 1 }}
             transition={transition}
             className="bg-gradient-to-b  from-[#fbd8cf] to-[#FFFFFF] p-6 rounded-lg shadow-lg shadow-gray-400"
-            >
+          >
             <h2 className="text-2xl font-bold mb-4 text-center">
               {userType === "patient" ? "Patient Login" : "Doctor Login"}
             </h2>

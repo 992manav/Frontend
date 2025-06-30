@@ -27,7 +27,7 @@ const AboutUs = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="bg-rose-50 rounded-2xl p-8 md:p-10 shadow-md hover:shadow-lg transition duration-300 border border-gray-100">
             <h2 className="text-4xl font-bold mb-6 text-gray-800">
-              We are <span className="text-[#c94a4a]">VAIDYAMITRA</span>
+              We are <span className="text-[#c94a4a]">JEEVANYA</span>
             </h2>
             <p className="text-lg leading-relaxed text-gray-700">
               A patient-focused digital healthcare platform that empowers lives

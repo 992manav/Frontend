@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const API_KEY = "AIzaSyA_hb7cq8vwzBx8qDVQVihCPDc1RDZ1Zho";
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent?key=${API_KEY}`;
 
 const AIDiagnose = () => {
+  const navigate = useNavigate();
   const StaircaseText = ({ text, className = "" }) => {
     const characters = Array.from(text);
     const container = {
@@ -213,6 +215,18 @@ const AIDiagnose = () => {
       >
         Dhanvantari AI
       </h1>
+      <div className="flex justify-center m-10">
+        <button
+          onClick={() => {
+            navigate("/liveai");
+          }}
+          className="px-6 py-3 bg-gradient-to-r from-[#f5b4b4] to-[#f8bfb2]] text-[#c94a4a] font-semibold rounded-2xl shadow-lg hover:brightness-110 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#c94a4a] tracking-wider"
+          style={{ fontFamily: "Pixelcraft, sans-serif" }}
+        >
+          🚀 Live AI
+        </button>
+      </div>
+
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="bg-white rounded-xl shadow-lg p-6">
           <h2 className="text-3xl font-bold text-slate-800 mb-6 border-b-2 border-slate-100 pb-4">

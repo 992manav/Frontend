@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import patient from "../assets/patient.webp";
 import doctor from "../assets/doctor.avif";
 import { useNavigate } from "react-router-dom";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
+import Webcam from "react-webcam";
+import * as faceapi from "face-api.js";
 
 export default function Signup() {
   const [userType, setUserType] = useState("patient");
@@ -19,7 +21,7 @@ export default function Signup() {
     speciality: "",
     licenseNumber: "",
     emergency_contact: "",
-    profile_picture: "",
+    faceDescriptor: null,
     address: "",
     blood_group: "",
     allergies: [],
@@ -29,12 +31,112 @@ export default function Signup() {
   const navigate = useNavigate();
   const transition = { type: "spring", stiffness: 120, damping: 15 };
 
+  // Face API states
+  const [modelsLoaded, setModelsLoaded] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [detections, setDetections] = useState([]);
+  const [faceDetected, setFaceDetected] = useState(false);
+
+  // References
+  const webcamRef = useRef(null);
+  const canvasRef = useRef(null);
+  const intervalRef = useRef(null);
+
+  // Load face-api.js models on component mount
+  useEffect(() => {
+    const loadModels = async () => {
+      const MODEL_URL = `/models`;
+
+      try {
+        toast.loading("Loading face detection models...");
+        await Promise.all([
+          faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL),
+          faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
+          faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
+        ]);
+        toast.dismiss();
+        toast.success("Face detection models loaded");
+        setModelsLoaded(true);
+      } catch (error) {
+        toast.dismiss();
+        toast.error("Failed to load face detection models");
+        console.error("Error loading face detection models:", error);
+      }
+    };
+
+    loadModels();
+
+    // Cleanup function to remove intervals when component unmounts
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
+
+  // Handle webcam stream when ready
+  const handleVideoOnPlay = useCallback(() => {
+    if (!modelsLoaded || !webcamRef.current || !canvasRef.current) return;
+
+    // Start continuous face detection
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+
+    intervalRef.current = setInterval(async () => {
+      if (webcamRef.current && webcamRef.current.video.readyState === 4) {
+        // Get video dimensions
+        const videoWidth = webcamRef.current.video.videoWidth;
+        const videoHeight = webcamRef.current.video.videoHeight;
+
+        // Set canvas dimensions to match video
+        canvasRef.current.width = videoWidth;
+        canvasRef.current.height = videoHeight;
+
+        // Detect faces
+        const detectedFaces = await faceapi
+          .detectAllFaces(webcamRef.current.video)
+          .withFaceLandmarks()
+          .withFaceDescriptors();
+
+        // Draw results on canvas
+        const ctx = canvasRef.current.getContext("2d");
+        ctx.clearRect(0, 0, videoWidth, videoHeight);
+
+        if (detectedFaces.length > 0) {
+          // Draw detections on canvas
+          const displaySize = { width: videoWidth, height: videoHeight };
+          const resizedDetections = faceapi.resizeResults(
+            detectedFaces,
+            displaySize
+          );
+
+          faceapi.draw.drawDetections(canvasRef.current, resizedDetections);
+          faceapi.draw.drawFaceLandmarks(canvasRef.current, resizedDetections);
+
+          setDetections(detectedFaces);
+          setFaceDetected(true);
+        } else {
+          setFaceDetected(false);
+        }
+      }
+    }, 100);
+  }, [modelsLoaded]);
+
+  // Handle form input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Handle user signup
   const handleSignup = async (e) => {
     e.preventDefault();
+
+    // For patient signup, ensure face descriptor is present
+    if (userType === "patient" && !formData.faceDescriptor) {
+      toast.error("Please process your face for recognition before signing up");
+      return;
+    }
 
     const endpoint =
       userType === "patient"
@@ -51,6 +153,81 @@ export default function Signup() {
       setError(err.response?.data?.message || "Signup failed");
     }
   };
+
+  // Capture face data
+  const captureAndProcessFace = useCallback(async () => {
+    if (!modelsLoaded) {
+      toast.error("Face recognition models are still loading");
+      return;
+    }
+
+    if (!webcamRef.current || !webcamRef.current.video) {
+      toast.error("Webcam is not available");
+      return;
+    }
+
+    if (!faceDetected) {
+      toast.error("No face detected. Please ensure your face is visible");
+      return;
+    }
+
+    try {
+      setIsProcessing(true);
+      toast.loading("Processing face...");
+
+      // Get the best detection (assuming the first one is the best if multiple)
+      const bestDetection = detections[0];
+
+      // Convert Float32Array descriptor to regular array for storage
+      const faceDescriptorArray = Array.from(bestDetection.descriptor);
+
+      console.log("Face Descriptor:", faceDescriptorArray);
+      // Store face descriptor in form data
+      setFormData((prev) => ({
+        ...prev,
+        faceDescriptor: faceDescriptorArray,
+      }));
+
+      // Take a clear snapshot for visual feedback
+      const video = webcamRef.current.video;
+      const canvas = document.createElement("canvas");
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      // Draw detection on the snapshot
+      const displaySize = { width: canvas.width, height: canvas.height };
+      const resizedDetections = faceapi.resizeResults(
+        [bestDetection],
+        displaySize
+      );
+      faceapi.draw.drawDetections(canvas, resizedDetections);
+      faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
+
+      // Show the processed result in the canvas
+      const resultCanvas = canvasRef.current;
+      const resultCtx = resultCanvas.getContext("2d");
+      resultCtx.clearRect(0, 0, resultCanvas.width, resultCanvas.height);
+      resultCtx.drawImage(
+        canvas,
+        0,
+        0,
+        resultCanvas.width,
+        resultCanvas.height
+      );
+
+      toast.dismiss();
+      toast.success("Face processed successfully!");
+    } catch (error) {
+      toast.dismiss();
+      toast.error("Error processing face");
+      console.error("Face processing error:", error);
+    } finally {
+      setIsProcessing(false);
+    }
+  }, [detections, faceDetected, modelsLoaded]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#ffcbc2] to-[#FFFFFF] p-6">
@@ -108,7 +285,7 @@ export default function Signup() {
               initial={false}
               animate={{ x: 0, opacity: 1 }}
               transition={transition}
-              className="bg-gradient-to-b  from-[#fbd8cf] to-[#FFFFFF] p-6 rounded-lg shadow-lg shadow-gray-400"
+              className="bg-gradient-to-b from-[#fbd8cf] to-[#FFFFFF] p-6 rounded-lg shadow-lg shadow-gray-400"
             >
               <h2 className="text-2xl font-bold mb-4 text-center">
                 {userType === "patient"
@@ -155,6 +332,52 @@ export default function Signup() {
 
                 {userType === "patient" ? (
                   <>
+                    <div className="flex flex-col items-center gap-2">
+                      <div className="relative">
+                        <Webcam
+                          audio={false}
+                          ref={webcamRef}
+                          screenshotFormat="image/jpeg"
+                          onPlay={handleVideoOnPlay}
+                          className="w-full h-48 border rounded-lg object-cover"
+                          mirrored={true}
+                        />
+                        <canvas
+                          ref={canvasRef}
+                          className="absolute top-0 left-0 w-full h-48 rounded-lg"
+                        />
+                      </div>
+
+                      {faceDetected ? (
+                        <div className="text-green-500 text-sm font-semibold">
+                          Face detected! You can now process your face.
+                        </div>
+                      ) : (
+                        <div className="text-yellow-500 text-sm font-semibold">
+                          Please position your face in the frame.
+                        </div>
+                      )}
+
+                      <button
+                        type="button"
+                        onClick={captureAndProcessFace}
+                        disabled={isProcessing || !faceDetected}
+                        className={`px-4 py-2 rounded-md font-medium ${
+                          isProcessing || !faceDetected
+                            ? "bg-gray-400 cursor-not-allowed"
+                            : "bg-green-500 hover:bg-green-600"
+                        } text-white transition`}
+                      >
+                        {isProcessing ? "Processing..." : "Process Face"}
+                      </button>
+
+                      {formData.faceDescriptor && (
+                        <div className="mt-2 p-2 bg-green-100 border border-green-500 rounded-lg text-sm text-green-700">
+                          Face successfully processed ✓
+                        </div>
+                      )}
+                    </div>
+
                     <input
                       type="date"
                       name="date_of_birth"
@@ -174,7 +397,7 @@ export default function Signup() {
                         Select Gender
                       </option>
                       <option value="male">Male</option>
-                      <option value="female">Female</option>f
+                      <option value="female">Female</option>
                       <option value="other">Other</option>
                     </select>
                   </>
@@ -217,22 +440,31 @@ export default function Signup() {
               </div>
               {userType === "patient" ? (
                 <div>
-                <button
-                  type="button"
-                  onClick={() => setStep(2)}
-                  className="mt-6 w-full bg-[#FAAB98] text-black py-2 rounded-lg font-bold hover:bg-[#f47f62] transition"
-                >
-                  Next
-                </button>
-                <p className="text-center text-gray-600 mt-4 text-sm">
-                  Allready have an account?{" "}
                   <button
-                    onClick={() => navigate("/login")}
-                    className="text-[#FAAB98] font-bold cursor-pointer hover:underline hover:text-[#f47f62]"
+                    type="button"
+                    onClick={() => {
+                      if (!formData.faceDescriptor) {
+                        toast.error(
+                          "Please process your face before continuing"
+                        );
+                        return;
+                      }
+                      setStep(2);
+                    }}
+                    className="mt-6 w-full bg-[#FAAB98] text-black py-2 rounded-lg font-bold hover:bg-[#f47f62] transition"
                   >
-                    Login
+                    Next
                   </button>
-                </p>
+                  <p className="text-center text-gray-600 mt-4 text-sm">
+                    Already have an account?{" "}
+                    <button
+                      type="button"
+                      onClick={() => navigate("/login")}
+                      className="text-[#FAAB98] font-bold cursor-pointer hover:underline hover:text-[#f47f62]"
+                    >
+                      Login
+                    </button>
+                  </p>
                 </div>
               ) : (
                 <div>
@@ -243,8 +475,9 @@ export default function Signup() {
                     Sign Up
                   </button>
                   <p className="text-center text-gray-600 mt-4 text-sm">
-                    Allready have an account?{" "}
+                    Already have an account?{" "}
                     <button
+                      type="button"
                       onClick={() => navigate("/login")}
                       className="text-[#FAAB98] font-bold cursor-pointer hover:underline hover:text-[#f47f62]"
                     >
@@ -262,7 +495,7 @@ export default function Signup() {
               initial={false}
               animate={{ x: 0, opacity: 1 }}
               transition={transition}
-              className="bg-gradient-to-b  from-[#fbd8cf] to-[#FFFFFF] p-6 rounded-lg shadow-lg shadow-gray-400"
+              className="bg-gradient-to-b from-[#fbd8cf] to-[#FFFFFF] p-6 rounded-lg shadow-lg shadow-gray-400"
             >
               <h2 className="text-2xl font-bold mb-4 text-center">
                 Additional Medical Details
@@ -319,7 +552,6 @@ export default function Signup() {
               >
                 Sign Up
               </button>
-              
             </motion.form>
           )}
         </motion.div>

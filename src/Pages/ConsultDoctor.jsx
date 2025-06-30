@@ -44,11 +44,26 @@ const StaircaseText = ({ text, className = "" }) => {
   };
 
   return (
-    <motion.div className={className} whileInView="visible" variants={container} initial="hidden">
+    <motion.div
+      className={className}
+      whileInView="visible"
+      variants={container}
+      initial="hidden"
+    >
       {characters.map((char, index) => (
-        <motion.span key={`${char}-${index}`} variants={child} style={{ position: "relative" }}>
+        <motion.span
+          key={`${char}-${index}`}
+          variants={child}
+          style={{ position: "relative" }}
+        >
           <span style={{ visibility: "hidden" }}>{char}</span>
-          <motion.span style={{ position: "absolute", left: 0, fontFamily: "Pixelcraft, sans-serif" }}>
+          <motion.span
+            style={{
+              position: "absolute",
+              left: 0,
+              fontFamily: "Pixelcraft, sans-serif",
+            }}
+          >
             {char === " " ? "\u00A0" : char}
           </motion.span>
         </motion.span>
@@ -111,11 +126,19 @@ const ContactDoctor = () => {
   };
 
   return (
-    <div style={{ fontFamily: "Barlow, sans-serif" }} className="min-h-screen bg-gradient-to-br from-[#fdd5c9] to-[#fcdcd3] p-6">
+    <div
+      style={{ fontFamily: "Barlow, sans-serif" }}
+      className="min-h-screen bg-gradient-to-br from-[#fdd5c9] to-[#fcdcd3] p-6"
+    >
       <div className="bg-white shadow-xl rounded-2xl p-8 max-w-3xl w-full mx-auto border-2 border-[#ffffff]">
         <div className="text-center mb-8">
-          <StaircaseText text="FIND A DOCTOR" className="font-bold text-[#c94a4a] text-5xl mb-4" />
-          <p className="text-gray-600 mt-2">Connect with the right specialist for your health needs</p>
+          <StaircaseText
+            text="FIND A DOCTOR"
+            className="font-bold text-[#c94a4a] text-5xl mb-4"
+          />
+          <p className="text-gray-600 mt-2">
+            Connect with the right specialist for your health needs
+          </p>
         </div>
 
         <div className="bg-rose-50 p-6 rounded-xl mb-6 shadow-md border border-gray-100">
@@ -126,13 +149,13 @@ const ContactDoctor = () => {
             onChange={(e) => setSymptoms(e.target.value)}
             className="w-full p-4 border border-gray-300 rounded-xl shadow-md focus:ring-2 focus:ring-[#c94a4a] focus:border-[#c94a4a] focus:outline-none transition-all"
           />
-          
+
           <div className="flex items-center my-4">
             <div className="flex-grow h-px bg-gray-300"></div>
             <span className="px-4 text-gray-600 font-medium">OR</span>
             <div className="flex-grow h-px bg-gray-300"></div>
           </div>
-          
+
           <motion.select
             value={selectedDomain}
             onChange={(e) => setSelectedDomain(e.target.value)}
@@ -145,7 +168,7 @@ const ContactDoctor = () => {
               </option>
             ))}
           </motion.select>
-          
+
           <motion.button
             onClick={handleSearch}
             className="mt-6 w-full px-6 py-4 bg-gradient-to-br from-[#c94a4a] to-[#d86e6e] text-white text-lg font-semibold rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center"
@@ -171,7 +194,7 @@ const ContactDoctor = () => {
         )}
 
         {doctorDomain && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="p-4 bg-rose-50 border border-rose-200 rounded-xl mb-6 text-center"
@@ -183,7 +206,7 @@ const ContactDoctor = () => {
         )}
 
         {doctors.length > 0 && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="mt-6 bg-white p-6 shadow-xl rounded-xl border border-gray-100"
@@ -197,21 +220,35 @@ const ContactDoctor = () => {
                 <motion.li
                   key={doctor._id}
                   className="p-5 bg-rose-50 border border-gray-200 rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-all"
-                  onClick={() => navigate("/firstconsult", { state: { doctor } })}
+                  onClick={() =>
+                    navigate("/firstconsult", { state: { doctor } })
+                  }
                   whileHover={{ scale: 1.02 }}
                 >
                   <div className="flex flex-col md:flex-row md:justify-between md:items-start">
                     <div>
-                      <strong className="text-xl text-gray-800">{doctor.name}</strong>
-                      <p className="text-[#c94a4a] font-medium">{doctor.speciality}</p>
+                      <strong className="text-xl text-gray-800">
+                        {doctor.name}
+                      </strong>
+                      <p className="text-[#c94a4a] font-medium">
+                        {doctor.speciality}
+                      </p>
                       <div className="mt-2 space-y-1">
-                        <p className="text-sm text-gray-600">License: {doctor.licenseNumber}</p>
-                        <p className="text-sm text-gray-600">Hospital ID: {doctor.hospitalId || "N/A"}</p>
+                        <p className="text-sm text-gray-600">
+                          License: {doctor.licenseNumber}
+                        </p>
+                        <p className="text-sm text-gray-600">
+                          Hospital ID: {doctor.hospitalId || "N/A"}
+                        </p>
                       </div>
                     </div>
                     <div className="mt-3 md:mt-0 md:ml-4">
-                      <p className="text-sm text-gray-600">Email: {doctor.email}</p>
-                      <p className="text-sm text-gray-600">Contact: {doctor.phone_number}</p>
+                      <p className="text-sm text-gray-600">
+                        Email: {doctor.email}
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        Contact: {doctor.phone_number}
+                      </p>
                       <div className="mt-3">
                         <span className="inline-block px-3 py-1 bg-[#c94a4a] bg-opacity-10 text-[#c94a4a] rounded-full text-sm font-medium">
                           Click to consult
