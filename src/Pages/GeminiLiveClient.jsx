@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Base64 } from "js-base64";
 
 const MODEL = "models/gemini-2.0-flash-exp";
-const API_KEY = "AIzaSyA_wRGv3B8uX6PBVPiIDeZOKsW8MLFbc_E";
+const API_KEY = "AIzaSyC3rZ0Xi_SEU1BFEJhHqRhxJc6-IAzIgFM";
 const HOST = "generativelanguage.googleapis.com";
 const WS_URL = `wss://${HOST}/ws/google.ai.generativelanguage.v1alpha.GenerativeService.BidiGenerateContent?key=${API_KEY}`;
 

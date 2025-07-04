@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { FaUserMd, FaSearch } from "react-icons/fa";
 
-const API_KEY = "AIzaSyCNpguGClxDMocK7z4NNEHScS5sXvhS2Sg";
+const API_KEY = "AIzaSyC3rZ0Xi_SEU1BFEJhHqRhxJc6-IAzIgFM";
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
 const doctorDomains = [

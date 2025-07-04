@@ -9,7 +9,7 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import "./LiveAi.css"; // Import your CSS styles
-const genAI = new GoogleGenerativeAI("AIzaSyA_hb7cq8vwzBx8qDVQVihCPDc1RDZ1Zho");
+const genAI = new GoogleGenerativeAI("AIzaSyC3rZ0Xi_SEU1BFEJhHqRhxJc6-IAzIgFM");
 const LiveAi = () => {
   const videoRef = useRef(null);
   const userInputRef = useRef(null);

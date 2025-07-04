@@ -2,7 +2,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || "";
 const genAI = new GoogleGenerativeAI(API_KEY);
-const MODEL_NAME = "gemini-1.5-flash-8b";
+const MODEL_NAME = "gemini-2.5-flash-8b";
 
 export class TranscriptionService {
   constructor() {

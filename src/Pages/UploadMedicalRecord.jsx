@@ -14,8 +14,8 @@ const UploadMedicalRecord = () => {
   const [loading, setLoading] = useState(false);
   const [ocrProgress, setOcrProgress] = useState(0);
 
-  const API_KEY = "AIzaSyA_hb7cq8vwzBx8qDVQVihCPDc1RDZ1Zho";
-  const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent?key=${API_KEY}`;
+  const API_KEY = "AIzaSyC3rZ0Xi_SEU1BFEJhHqRhxJc6-IAzIgFM";
+  const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
   const handleFileChange = (e) => {
     const uploadedFile = e.target.files[0];
