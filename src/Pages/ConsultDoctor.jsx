@@ -113,7 +113,7 @@ const ContactDoctor = () => {
       setDoctorDomain(result);
       if (result !== "Unknown") {
         const doctorResponse = await axios.get(
-          `http://localhost:3000/api/doctor/getallDomaindoctors?speciality=${result}`
+          `https://backend-g51b.onrender.com/api/doctor/getallDomaindoctors?speciality=${result}`
         );
         console.log("karan ", doctorResponse);
         setDoctors(doctorResponse.data.doctors || []);

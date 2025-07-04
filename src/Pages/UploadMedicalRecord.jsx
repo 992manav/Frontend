@@ -131,7 +131,7 @@ const UploadMedicalRecord = () => {
       async function sendDoctorContentToBackend() {
         try {
           const response = await axios.post(
-            `http://localhost:3000/api/patient/setmedicalrecord`,
+            `https://backend-g51b.onrender.com/api/patient/setmedicalrecord`,
             {
               medicalHistory: doctorContent,
             },

@@ -17,7 +17,7 @@ const CommunityDiscussions = () => {
     const fetchDiscussions = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/community/getcommunitydiscussion/${communityName}`
+          `https://backend-g51b.onrender.com/api/community/getcommunitydiscussion/${communityName}`
         );
         setDiscussions(response.data.discussions || []);
       } catch (err) {
@@ -46,7 +46,7 @@ const CommunityDiscussions = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:3000/api/community/addnewdiscussion/${communityName}`,
+        `https://backend-g51b.onrender.com/api/community/addnewdiscussion/${communityName}`,
         {
           title: newTitle,
           content: newMessage,

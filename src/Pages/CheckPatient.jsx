@@ -25,7 +25,7 @@ const CheckPatient = ({ userData }) => {
   const getPatientDetails = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/patient/getpatient/${patientID}`,
+        `https://backend-g51b.onrender.com/api/patient/getpatient/${patientID}`,
         { withCredentials: true }
       );
       console.log("Patient Data:", response.data.patient);
@@ -75,7 +75,7 @@ const CheckPatient = ({ userData }) => {
     try {
       if (modalType === "Prescription") {
         await axios.post(
-          `http://localhost:3000${endpoint}`,
+          `https://backend-g51b.onrender.com${endpoint}`,
           {
             reportID: report?._id,
             message: medications.map((med) => {
@@ -90,7 +90,7 @@ const CheckPatient = ({ userData }) => {
         );
       } else {
         await axios.post(
-          `http://localhost:3000${endpoint}`,
+          `https://backend-g51b.onrender.com${endpoint}`,
           {
             reportID: report?._id,
             message,

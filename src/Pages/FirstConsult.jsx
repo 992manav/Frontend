@@ -72,7 +72,7 @@ const FirstConsult = () => {
     setIsSubmitting(true);
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/report/setFirstReport",
+        "https://backend-g51b.onrender.com/api/report/setFirstReport",
         {
           doctorId: doctor._id,
           symptoms,

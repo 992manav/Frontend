@@ -8,7 +8,7 @@ const SupportGroupCard = ({ name, description }) => {
   const handleJoinGroup = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/community/getcommunitydiscussion/${name}`
+        `https://backend-g51b.onrender.com/api/community/getcommunitydiscussion/${name}`
       );
 
       navigate("/community", {

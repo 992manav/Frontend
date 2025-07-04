@@ -228,7 +228,7 @@ const EmergencyPage = () => {
   const fetchLabeledDescriptors = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/patient/labeled-descriptors"
+        "https://backend-g51b.onrender.com/api/patient/labeled-descriptors"
       );
 
       console.log("Fetched labeled descriptors:", response.data);
@@ -276,7 +276,7 @@ const EmergencyPage = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:3000/api/patient/getpatient`,
+        `https://backend-g51b.onrender.com/api/patient/getpatient`,
         { name: searchName },
         { headers: { "Content-Type": "application/json" } }
       );

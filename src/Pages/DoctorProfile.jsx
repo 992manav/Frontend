@@ -10,7 +10,7 @@ const DoctorProfile = () => {
   const docprofile = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/doctor/getcurrentdoctor",
+        "https://backend-g51b.onrender.com/api/doctor/getcurrentdoctor",
         { withCredentials: true }
       );
       console.log("Doctor Info:", response.data.doctor);
@@ -23,7 +23,7 @@ const DoctorProfile = () => {
   const getReports = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/report/getreports",
+        "https://backend-g51b.onrender.com/api/report/getreports",
         { withCredentials: true }
       );
       console.log("Reports Data:", response.data.report);

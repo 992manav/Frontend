@@ -16,7 +16,7 @@ const ReportPage = () => {
     const fetchReport = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/report/getreport/${reportId}`,
+          `https://backend-g51b.onrender.com/api/report/getreport/${reportId}`,
           { withCredentials: true }
         );
         console.log(response.data.report);

@@ -140,8 +140,8 @@ export default function Signup() {
 
     const endpoint =
       userType === "patient"
-        ? "http://localhost:3000/api/auth/registerpatient"
-        : "http://localhost:3000/api/auth/registerdoctor";
+        ? "https://backend-g51b.onrender.com/api/auth/registerpatient"
+        : "https://backend-g51b.onrender.com/api/auth/registerdoctor";
 
     try {
       const response = await axios.post(endpoint, formData);

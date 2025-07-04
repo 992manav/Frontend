@@ -21,8 +21,8 @@ export default function Login() {
 
     const endpoint =
       userType === "patient"
-        ? "http://localhost:3000/api/auth/loginpatient"
-        : "http://localhost:3000/api/auth/logindoctor";
+        ? "https://backend-g51b.onrender.com/api/auth/loginpatient"
+        : "https://backend-g51b.onrender.com/api/auth/logindoctor";
 
     const payload =
       userType === "patient"
